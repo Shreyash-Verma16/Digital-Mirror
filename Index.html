@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Mirror Prompt</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Clean, architectural typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Cinematic Welcome Screen Overlay -->
+    <div class="intro-overlay">
+        <h2 class="intro-message">Hey buddy
+            here is your prompt.</h2>
+    </div>
+
+    <!-- Engagement Pop-up Modal (Hidden by default) -->
+    <div id="copyModal" class="modal-overlay">
+        <div class="modal-card">
+            <div class="modal-icon-wrapper">
+                <svg class="modal-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+            </div>
+            <h3>Successfully Copied!</h3>
+            <p>Don't forget to follow, like, and subscribe. Thanks!</p>
+        </div>
+    </div>
+
+    <!-- Main Clean App Interface -->
+    <div id="mainContent" class="main-wrapper">
+        <div class="app-container">
+            
+            <header class="app-header">
+                <h1 class="app-title">🪞 Digital Mirror Prompt</h1>
+                <p class="app-subtitle">Advanced psychological profiling template for system prompts.</p>
+            </header>
+
+            <main class="prompt-interface">
+                <!-- System File Management Header Bar -->
+                <div class="interface-bar">
+                    <div class="meta-info">
+                        <span class="status-dot"></span>
+                        <span class="file-name">digital_mirror_prompt.md</span>
+                    </div>
+                    
+                    <button class="action-copy-btn" onclick="executeCopy()">
+                        <svg class="icon-svg" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+                        </svg>
+                        <span class="btn-display-text">Copy Code</span>
+                    </button>
+                </div>
+
+                <!-- Code Viewport Panel -->
+                <div class="viewport-box">
+                    <pre id="rawPrompt">🪞 Digital Mirror Prompt
+
+You are an expert behavioral analyst with access only to our previous conversations and any memories you've been explicitly allowed to retain.
+
+Your goal is to create the most accurate psychological profile possible based only on evidence from our conversations. Do not invent facts or make unsupported assumptions. Clearly distinguish between facts, reasonable inferences, and uncertainty.
+
+## Part 1 — What You Know About Me
+
+Summarize everything you've learned about me, including:
+* My biggest goals
+* My interests
+* My recurring challenges
+* My habits
+* My communication style
+* My values
+* My strengths
+* My weaknesses
+* My current projects
+
+---
+
+## Part 2 — Pattern Analysis
+
+Analyze the patterns behind everything you've observed.
+Answer the following:
+1. What are my three greatest strengths?
+2. What are my three biggest weaknesses?
+3. What habits keep repeating?
+4. What mistakes do I make over and over?
+5. What am I avoiding?
+6. What fears or limiting beliefs seem to influence my decisions?
+7. What motivates me the most?
+8. What usually drains my energy or enthusiasm?
+9. What type of work or lifestyle seems to fit me best?
+10. What's one thing about me that I probably don't realize myself?
+
+---
+
+## Part 3 — The Future
+
+Based on my current patterns—not guesses or supernatural prediction—answer:
+* If I continue exactly as I am today, where will I most likely be in 3 years?
+* What opportunities am I likely to miss?
+* What risks am I should watch out for?
+* What is the biggest obstacle between me and my goals?
+* What single change would have the highest impact on my future?
+
+---
+
+## Part 4 — Brutal Honesty
+
+Do not protect my feelings.
+Tell me:
+* Three uncomfortable truths I need to hear.
+* One belief I should question.
+* One habit I should stop immediately.
+* One habit I should build immediately.
+* What would disappoint my future self if nothing changed?
+
+---
+
+## Part 5 — Final Verdict
+
+Give me:
+* A one-paragraph psychological profile.
+* A score out of 10 for:
+  * Discipline
+  * Consistency
+  * Self-awareness
+  * Decision-making
+  * Growth mindset
+
+Explain every score.
+
+Finish with one sentence that summarizes the biggest lesson from everything you've learned about me.</pre>
+                </div>
+            </main>
+            
+        </div>
+    </div>
+
+    <!-- UI Copy Engine and Modal Logic -->
+    <script>
+        function executeCopy() {
+            const copyTargetText = document.getElementById('rawPrompt').innerText;
+            const modal = document.getElementById('copyModal');
+            const mainContent = document.getElementById('mainContent');
+
+            navigator.clipboard.writeText(copyTargetText).then(() => {
+                // 1. Bring up the modal and blur the layout background
+                modal.classList.add('active');
+                mainContent.classList.add('modal-blur');
+                
+                // 2. Automatically dismantle modal and blur state after 2 seconds
+                setTimeout(() => {
+                    modal.classList.remove('active');
+                    mainContent.classList.remove('modal-blur');
+                }, 2000);
+            }).catch(err => {
+                console.error('System failed to execute clip write: ', err);
+            });
+        }
+    </script>
+</body>
+</html>
